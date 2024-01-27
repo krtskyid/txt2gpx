@@ -1,5 +1,13 @@
-server:
-  port: 8080
+camel:
+  servlet:
+    mapping:
+      context-path: /*
 
 gcp:
   project-id: tg-bot-txt2gpx-330001
+
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
