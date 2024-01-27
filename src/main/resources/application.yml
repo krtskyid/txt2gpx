@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+gcp:
+  project-id: tg-bot-txt2gpx-330001
