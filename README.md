@@ -55,7 +55,7 @@ Output .gpx file example:
         <sym>Waypoint</sym>
         <extensions>
             <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
-                <displayMode>SymbolAndName</displayMode>
+                <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
             </gpxx:WaypointExtension>
         </extensions>
     </wpt>
@@ -65,7 +65,7 @@ Output .gpx file example:
         <sym>Waypoint</sym>
         <extensions>
             <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
-                <displayMode>SymbolAndName</displayMode>
+                <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
             </gpxx:WaypointExtension>
         </extensions>
     </wpt>
@@ -75,7 +75,7 @@ Output .gpx file example:
         <sym>Waypoint</sym>
         <extensions>
             <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
-                <displayMode>SymbolAndName</displayMode>
+                <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
             </gpxx:WaypointExtension>
         </extensions>
     </wpt>
