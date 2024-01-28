@@ -10,6 +10,6 @@ public class WaypointExtension {
     @XmlAttribute(name = "xmlns:gpxx")
     private String xmlnsGpxx = "http://www.garmin.com/xmlschemas/GpxExtensions/v3";
 
-    @XmlElement
+    @XmlElement(name = "gpxx:DisplayMode")
     private String displayMode;
 }
