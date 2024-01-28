@@ -2,3 +2,4 @@ camel:
   component:
     telegram:
       authorization-token: ${BOT_TOKEN}
+      base-uri: https://api.telegram.org
