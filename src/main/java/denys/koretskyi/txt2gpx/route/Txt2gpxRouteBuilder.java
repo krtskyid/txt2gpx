@@ -1,15 +1,15 @@
 package denys.koretskyi.txt2gpx.route;
 
-import denys.koretskyi.txt2gpx.model.TelegramApiGetFileRequest;
-import denys.koretskyi.txt2gpx.model.TelegramApiGetFileResponse;
+import denys.koretskyi.txt2gpx.model.telegram.TelegramApiGetFileRequest;
+import denys.koretskyi.txt2gpx.model.telegram.TelegramApiGetFileResponse;
+import denys.koretskyi.txt2gpx.service.Txt2GpxFileService;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.telegram.model.IncomingMessage;
 import org.apache.camel.component.telegram.model.OutgoingDocumentMessage;
 import org.springframework.stereotype.Component;
 
-import static denys.koretskyi.txt2gpx.util.FileUtil.WINDOWS_1251;
-import static denys.koretskyi.txt2gpx.util.FileUtil.convertBodyBytesToCharset;
-import static denys.koretskyi.txt2gpx.util.FileUtil.updateFileName;
+import static denys.koretskyi.txt2gpx.util.Constants.CONVERTED_GPX_EXTENSION;
+import static denys.koretskyi.txt2gpx.util.Constants.TXT_EXTENSION;
 import static org.apache.camel.Exchange.HTTP_METHOD;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -18,14 +18,12 @@ import static org.springframework.http.HttpMethod.POST;
 public class Txt2gpxRouteBuilder extends RouteBuilder {
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         from("telegram:bots")
             .choice()
                 .when(simple("${body.document} != null"))
                     .log("received message with a document: ${body}")
                     .setProperty("fileName", simple("${body.document.fileName}"))
-                    .setProperty("messageId", simple("${body.messageId}"))
-                    .setProperty("chatId", simple("${body.chat.id}"))
                     .setBody(exchange ->
                         new TelegramApiGetFileRequest(
                                 exchange.getIn().getBody(IncomingMessage.class).getDocument().getFileId()))
@@ -43,14 +41,18 @@ public class Txt2gpxRouteBuilder extends RouteBuilder {
                             .json()
                             .setHeader(HTTP_METHOD, constant(GET))
                             .toD("{{camel.component.telegram.base-uri}}/file/bot{{BOT_TOKEN}}/${exchangeProperty.filePath}")
-                            //TODO parse .txt and convert to .gpx
+                            .bean(Txt2GpxFileService.class, "convertTo1251Charset")
+                            .bean(Txt2GpxFileService.class, "splitByLines")
+                            .bean(Txt2GpxFileService.class, "txtToGpx")
+                            .marshal()
+                            .jaxb()
                             .setBody(exchange -> {
-                                OutgoingDocumentMessage outgoingMessage = new OutgoingDocumentMessage();
-                                outgoingMessage.setDocument(
-                                        convertBodyBytesToCharset(exchange.getIn().getBody(byte[].class), WINDOWS_1251));
-                                outgoingMessage.setFilenameWithExtension(
-                                        updateFileName(exchange.getProperty("fileName", String.class)));
-                                return outgoingMessage;
+                                OutgoingDocumentMessage outMessage = new OutgoingDocumentMessage();
+                                outMessage.setDocument(exchange.getIn().getBody(byte[].class));
+                                outMessage.setFilenameWithExtension(
+                                        exchange.getProperty("fileName", String.class)
+                                                .replaceAll(TXT_EXTENSION, CONVERTED_GPX_EXTENSION));
+                                return outMessage;
                             })
                             .log("outgoing message: ${body}")
                         .end()

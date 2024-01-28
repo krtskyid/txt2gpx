@@ -1,4 +1,4 @@
-package denys.koretskyi.txt2gpx.model;
+package denys.koretskyi.txt2gpx.model.telegram;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

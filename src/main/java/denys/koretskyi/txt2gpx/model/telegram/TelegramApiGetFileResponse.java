@@ -1,4 +1,4 @@
-package denys.koretskyi.txt2gpx.model;
+package denys.koretskyi.txt2gpx.model.telegram;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
