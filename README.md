@@ -23,7 +23,7 @@ Cloud Run
 
 ## Telegram bot link
 
-https://t.me/txt2gpx_converter_bot
+https://t.me/txt2gpx_bot
 
 Input .txt file example:
 
