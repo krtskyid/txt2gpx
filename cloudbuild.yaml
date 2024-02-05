@@ -29,7 +29,7 @@ steps:
         --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
       - '--update-secrets=BOT_TOKEN=tg-bot-token:latest'
       - '--max-instances=1'
-      - '--min-instances=1'
+#      - '--min-instances=1'
 #      - '--no-cpu-throttling'
       - '--region=$_DEPLOY_REGION'
       - '--quiet'
