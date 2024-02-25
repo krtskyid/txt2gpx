@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "txt2gpx"
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: "txt2gpx"
@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
         - name: "txt2gpx-sha256-1"
-          image: "${IMAGE}"
+          image: "europe-north1-docker.pkg.dev/tg-bot-txt2gpx-330001/cloud-run-source-deploy/txt2gpx/txt2gpx@sha256:6e24abff6e5e2269996f45cd3207f36a02527b7a8fd0e7d4d5bbd7d151aa86f0"
