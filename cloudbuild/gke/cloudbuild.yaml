@@ -22,7 +22,6 @@ steps:
 #      - --filename=kubernetes-resource-file
       - --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - --cluster=txt2gpx-cluster
-      - --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
     id: Deploy
 images:
   - >-
