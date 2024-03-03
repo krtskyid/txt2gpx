@@ -35,7 +35,7 @@ steps:
       - --zone $_REGION-$_ZONE
       - --container-stdin
       - --container-tty
-      - --container-image=$_REGION-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+      - --container-image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - --machine-type $_MACHINE_TYPE
       - --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
       - --scopes https://www.googleapis.com/auth/cloud-platform
@@ -50,6 +50,7 @@ substitutions:
   _SERVICE_NAME: txt2gpx
   _REGION: us-central1
   _ZONE: a
+  _AR_HOSTNAME: $_REGION-docker.pkg.dev
   _MACHINE_TYPE: e2-micro
   _BRANCH_NAME: ${BRANCH_NAME//\//_}
 tags:
