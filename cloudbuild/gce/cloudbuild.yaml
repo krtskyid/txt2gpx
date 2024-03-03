@@ -33,7 +33,7 @@ steps:
       - instances
       - create-with-container
       - $_SERVICE_NAME-machine
-      - --zone $_REGION-$_ZONE
+      - --zone=$_REGION-$_ZONE
       - --container-stdin
       - --container-tty
       - --container-image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
