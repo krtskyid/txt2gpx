@@ -18,7 +18,6 @@ steps:
     id: Delete old
     allowFailure: true
     args:
-      - gcloud
       - compute
       - instances
       - delete
