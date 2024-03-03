@@ -47,10 +47,10 @@ options:
   substitutionOption: ALLOW_LOOSE
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _SERVICE_NAME: txt2gpx
+  _AR_HOSTNAME: us-central1-docker.pkg.dev
   _REGION: us-central1
   _ZONE: a
-  _AR_HOSTNAME: $_REGION-docker.pkg.dev
+  _SERVICE_NAME: txt2gpx
   _MACHINE_TYPE: e2-micro
   _BRANCH_NAME: ${BRANCH_NAME//\//_}
 tags:
