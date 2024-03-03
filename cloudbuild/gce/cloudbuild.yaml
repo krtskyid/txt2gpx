@@ -38,7 +38,7 @@ steps:
       - --container-image=$_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - --machine-type=$_MACHINE_TYPE
       - --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
-      - --container-env BOT_TOKEN=$(gcloud secrets versions access latest --secret="tg-bot-token")
+      - --container-env=BOT_TOKEN=$(gcloud secrets versions access latest --secret="tg-bot-token")
 images:
   - $_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
 options:
