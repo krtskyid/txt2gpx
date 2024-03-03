@@ -25,20 +25,14 @@ steps:
       - --zone=$_REGION-$_ZONE
       - -q
   - name: gcr.io/cloud-builders/gcloud
-    id: Get bot token
+    id: Deploy
     entrypoint: bash
     args:
       - -c
       - |
         BOT_TOKEN=$(gcloud secrets versions access latest --secret="tg-bot-token")
         echo $$BOT_TOKEN
-    dir: .
-    secretEnv:
-      - BOT_TOKEN
-  - name: gcr.io/cloud-builders/gcloud
-    id: Deploy
-    args:
-      - beta
+      - gcloud
       - compute
       - instances
       - create-with-container
@@ -49,7 +43,7 @@ steps:
       - --container-image=$_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - --machine-type=$_MACHINE_TYPE
       - --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
-      - --container-env=BOT_TOKEN=${_BOT_TOKEN}
+      - --container-env=BOT_TOKEN=$$BOT_TOKEN
 images:
   - $_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
 options:
