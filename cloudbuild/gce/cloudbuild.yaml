@@ -25,7 +25,7 @@ steps:
       - --zone=$_REGION-$_ZONE
       - -q
   - name: gcr.io/cloud-builders/gcloud
-  id: Get bot token
+    id: Get bot token
     entrypoint: bash
     args:
       - -c
