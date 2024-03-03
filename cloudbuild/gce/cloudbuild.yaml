@@ -22,7 +22,7 @@ steps:
       - instances
       - delete
       - $_SERVICE_NAME-machine
-      - --zone=us-central1-a
+      - --zone=$_REGION-$_ZONE
       - -q
   - name: gcr.io/cloud-builders/gcloud
     id: Deploy
