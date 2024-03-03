@@ -31,18 +31,14 @@ steps:
       - -c
       - |
         BOT_TOKEN=$(gcloud secrets versions access latest --secret="tg-bot-token")
-      - gcloud
-      - compute
-      - instances
-      - create-with-container
-      - $_SERVICE_NAME-machine
-      - --zone=$_REGION-$_ZONE
-      - --container-stdin
-      - --container-tty
-      - --container-image=$_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
-      - --machine-type=$_MACHINE_TYPE
-      - --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME
-      - --container-env=BOT_TOKEN=$$BOT_TOKEN
+        gcloud compute instances create-with-container $_SERVICE_NAME-machine \
+        --zone=$_REGION-$_ZONE \
+        --container-stdin \
+        --container-tty \
+        --container-image=$_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA \
+        --machine-type=$_MACHINE_TYPE \
+        --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,branch=$_BRANCH_NAME \
+        --container-env=BOT_TOKEN=$$BOT_TOKEN
 images:
   - $_AR_HOSTNAME/$PROJECT_ID/gce-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
 options:
