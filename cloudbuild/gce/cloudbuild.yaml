@@ -21,7 +21,7 @@ steps:
       - compute
       - instances
       - delete
-      - txt2gpx
+      - $_SERVICE_NAME-machine
       - --zone=us-central1-a
       - -q
   - name: gcr.io/cloud-builders/gcloud
