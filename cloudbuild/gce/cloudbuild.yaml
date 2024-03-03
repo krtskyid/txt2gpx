@@ -31,7 +31,6 @@ steps:
       - -c
       - |
         BOT_TOKEN=$(gcloud secrets versions access latest --secret="tg-bot-token")
-        echo $$BOT_TOKEN
       - gcloud
       - compute
       - instances
