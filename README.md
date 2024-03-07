@@ -8,18 +8,20 @@ Java 17
 Maven  
 Spring Boot  
 Apache Camel  
-Cloud Run
+Containerized for Cloud Run / GKE / GCE
 
 ## CI & CD
+### Cloud Build pipelines
 
 * Service is being built from GitHub repository by
-  GCP [Cloud Build](https://console.cloud.google.com/cloud-build/triggers?project=tg-bot-txt2gpx-330001)
+  GCP Cloud Build after running one of Cloud Build [triggers](https://console.cloud.google.com/cloud-build/triggers?project=tg-bot-txt2gpx-330001)
+  There are multiple triggers for Cloud Run and GCE VM f1-micro (free tier) deployment
 * Built images are being pushed
-  to [Cloud Registry](https://console.cloud.google.com/artifacts/docker/tg-bot-txt2gpx-330001/europe-north1/cloud-run-source-deploy/txt2gpx%2Ftxt2gpx?project=tg-bot-txt2gpx-330001)
+  to according [Cloud Registry](https://console.cloud.google.com/artifacts?project=tg-bot-txt2gpx-330001)
   repository  
-  Images older than 1 day are automatically deleted from Registry by cleanup policy
+  Images older than 1 day are automatically deleted from Registry repo by cleanup policy
 * After push to Registry, image is being deployed
-  as [Cloud Run](https://console.cloud.google.com/run?project=tg-bot-txt2gpx-330001) service
+  either as [Cloud Run](https://console.cloud.google.com/run?project=tg-bot-txt2gpx-330001) service or as [GCE f1-micro instance](https://console.cloud.google.com/compute/instances?project=tg-bot-txt2gpx-330001)
 
 ## Telegram bot link
 
