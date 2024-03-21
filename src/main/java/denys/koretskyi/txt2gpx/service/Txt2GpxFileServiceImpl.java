@@ -48,7 +48,9 @@ public class Txt2GpxFileServiceImpl implements Txt2GpxFileService {
         waypoint.setName(fields[0]);
         waypoint.setLat(fields[1]);
         waypoint.setLon(fields[2]);
-        waypoint.setEle(fields[3]);
+        if (fields.length > 3) {
+            waypoint.setEle(fields[3]);
+        }
         waypoint.setSym(SYM_WAYPOINT);
         waypoint.setExtensions(extensions);
         return waypoint;
