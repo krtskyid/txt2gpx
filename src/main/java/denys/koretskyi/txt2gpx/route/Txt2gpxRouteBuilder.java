@@ -20,6 +20,10 @@ public class Txt2gpxRouteBuilder extends RouteBuilder {
     @Override
     public void configure() {
         from("telegram:bots")
+            .onException(Exception.class)
+                .setBody(simple("Exception occurred during processing:\n${exchangeProperty.CamelExceptionCaught}"))
+                .to("telegram:bots")
+            .end()
             .choice()
                 .when(simple("${body.document} != null"))
                     .log("received message with a document: ${body}")
